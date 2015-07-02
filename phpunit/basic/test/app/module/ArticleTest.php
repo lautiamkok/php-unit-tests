@@ -15,9 +15,9 @@ class ArticleTest extends SuiteTest
     protected function setUp()
     {
         $this->truncateTables(
-            array(
+            [
                 'article'
-            )
+            ]
         );
 
         self::$Article = new Article(self::$PDO);
