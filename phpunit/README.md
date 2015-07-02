@@ -25,7 +25,7 @@
 }
 ```
 
-ref: https://phpunit.de/manual/current/en/installation.html#installation.composer
+    ref: https://phpunit.de/manual/current/en/installation.html#installation.composer
 
 4. Run composer update in your CMD.
 
@@ -57,11 +57,9 @@ ref: https://phpunit.de/manual/current/en/installation.html#installation.compose
 </phpunit>
 ```
 
-ref:
-
-    * https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.testsuites
-
-    * https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.phpunit
+    ref:
+        * https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.testsuites
+        * https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.phpunit
 
 6. To run the test, run this line in your CMD,
 
