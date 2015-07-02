@@ -2,9 +2,9 @@
 
 1. Install composer.
 
-2. Add C:\php\composer to the Path in environment variable.
+2. Add `C:\php\composer` to the Path in environment variable.
 
-3. Install PHPUnit via Composer - create a file composer.json,
+3. Install PHPUnit via Composer - create a file `composer.json`,
 
 ```
 {
@@ -50,7 +50,7 @@
     <testsuites>
       <testsuite name="My Test Suite">
         <directory>test/</directory>
-        <file>test/app/module/Article/Controller/RetrieveTest.php</file>
+        <file>test/path/to/ArticleTest.php</file>
         <exclude>/path/to/exclude</exclude>
       </testsuite>
     </testsuites>
@@ -63,7 +63,7 @@
 
 6. To run the test, run this line in your CMD,
 
-`phpunit test/app/module/Article/Controller/RetrieveTest.<?php  ?>
+`phpunit test/app/module/ArticleTest.`
 
 or just
 
