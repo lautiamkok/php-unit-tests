@@ -28,11 +28,11 @@ var_dump($result);
 
 // Create one.
 $result = $Article->createRow(
-    array(
+    [
         ':title' => 'Hello World',
         ':description' => 'Hello World',
         ':content' => 'Hello World'
-    )
+    ]
 );
 
 print('create: ');
@@ -42,21 +42,23 @@ $article_id = $PdoAdapter->fetchLastInsertId();
 
 // Update one.
 $result = $Article->updateRow(
-    array(
+    [
         ':title' => 'Hello World - updated',
         ':description' => 'Hello World - updated',
         ':content' => 'Hello World - updated',
         ':article_id' => $article_id
-    )
+    ]
 );
 
 print('update: ');
 var_dump($result);
 
 // Delete one.
-$result = $Article->deleteRow(array(
-    ':article_id' => $article_id
-));
+$result = $Article->deleteRow(
+    [
+        ':article_id' => $article_id
+    ]
+);
 
 print('delete: ');
 var_dump($result);

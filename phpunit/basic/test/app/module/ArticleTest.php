@@ -26,17 +26,17 @@ class ArticleTest extends SuiteTest
     public function testFetchRow()
     {
         self::$Article->createRow(
-            array(
+            [
                 ':title' => 'Hello World',
                 ':description' => 'Hello World',
                 ':content' => 'Hello World'
-            )
+            ]
         );
 
         $result = self::$Article->fetchRow(
-            array(
+            [
                 ':article_id' => self::$PDO->fetchLastInsertId()
-            )
+            ]
         );
 
         $this->assertArrayHasKey('article_id', $result);
@@ -48,11 +48,11 @@ class ArticleTest extends SuiteTest
     public function testFetchRows()
     {
         self::$Article->createRow(
-            array(
+            [
                 ':title' => 'Hello World',
                 ':description' => 'Hello World',
                 ':content' => 'Hello World'
-            )
+            ]
         );
 
         $result = self::$Article->fetchRows();
@@ -64,11 +64,11 @@ class ArticleTest extends SuiteTest
     public function testCreateRow()
     {
         $result = self::$Article->createRow(
-            array(
+            [
                 ':title' => 'Hello World',
                 ':description' => 'Hello World',
                 ':content' => 'Hello World'
-            )
+            ]
         );
 
         $this->assertTrue($result);
@@ -77,22 +77,22 @@ class ArticleTest extends SuiteTest
     public function testUpdateRow()
     {
         self::$Article->createRow(
-            array(
+            [
                 ':title' => 'Hello World',
                 ':description' => 'Hello World',
                 ':content' => 'Hello World'
-            )
+            ]
         );
 
         // The params that you send in for update must be different from the existing data in the row
         // otherwise nothing is updated and you get false in the result in phpunit.
         $result = self::$Article->updateRow(
-            array(
+            [
                 ':title' => 'Hello World - updated',
                 ':description' => 'Hello World - updated',
                 ':content' => 'Hello World - updated',
                 ':article_id' => self::$PDO->fetchLastInsertId()
-            )
+            ]
         );
 
         $this->assertTrue($result);
@@ -101,17 +101,17 @@ class ArticleTest extends SuiteTest
     public function testDeleteRow()
     {
         self::$Article->createRow(
-            array(
+            [
                 ':title' => 'Hello World',
                 ':description' => 'Hello World',
                 ':content' => 'Hello World'
-            )
+            ]
         );
 
         $result = self::$Article->deleteRow(
-            array(
+            [
                 ':article_id' => self::$PDO->fetchLastInsertId()
-            )
+            ]
         );
 
         $this->assertTrue($result);
