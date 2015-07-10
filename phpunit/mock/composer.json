@@ -1,0 +1,20 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Foo\\": [
+                "app/module/",
+                "app/source/"
+            ],
+            "YourCustomNamespace\\": [
+                "source/local/",
+                "module/local/source/"
+            ]
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.7.*"
+    },
+    "require": {
+        "Mockery/Mockery": ">=0.7.2"
+    }
+}
