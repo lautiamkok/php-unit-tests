@@ -19,8 +19,6 @@ class ArticleTest extends SuiteTest
                 'article'
             ]
         );
-
-        self::$Article = new Article(self::$PDO);
     }
 
     public function testStub()
@@ -30,7 +28,7 @@ class ArticleTest extends SuiteTest
                      //->setConstructorArgs(array(self::$PDO))
                      // or:
                      // You can mock the class that you are testing and specify the method that you want to mock.
-                     ->setMethods(array('doOneThing'))
+                     ->setMethods(['doOneThing'])
                      ->disableOriginalConstructor()
                      ->getMock();
 
@@ -48,7 +46,7 @@ class ArticleTest extends SuiteTest
     public function testFetchRow()
     {
         $mock_pdo = $this->getMockBuilder('Foo\Adapter\PdoAdapter')
-                         ->setMethods(array('executeSQL', 'fetchRow', 'fetchLastInsertId'))
+                         ->setMethods(['fetchRow'])
                          ->getMock();
 
         $sql = '
@@ -59,19 +57,64 @@ class ArticleTest extends SuiteTest
 
         $mock_pdo->expects($this->once())
                  ->method('fetchRow')
-                 ->with($sql,array(':article_id' => 1))
+                 ->with($sql,[':article_id' => 1])
                  ->will($this->returnValue(
-                        array(
+                        [
                             'title' => 'Hello',
                             'content' => 'World'
-                        )
+                        ]
                     ));
 
         $Article = new Article($mock_pdo);
 
-        $result = $Article->fetchRow(array(':article_id' => 1));
+        $result = $Article->fetchRow([':article_id' => 1]);
 
         $expected = 2;
         $this->assertEquals($expected, count($result));
+    }
+
+    public function testCreateRow()
+    {
+        $mock_pdo = $this->getMockBuilder('Foo\Adapter\PdoAdapter')
+                         ->setMethods(['executeSQL'])
+                         ->getMock();
+
+        $sql = '
+            INSERT INTO article (
+                title,
+                description,
+                content,
+                created_on
+           )VALUES(
+                :title,
+                :description,
+                :content,
+                NOW()
+           )
+        ';
+
+        $mock_pdo->expects($this->once())
+                 ->method('executeSQL')
+                 ->with($sql,
+                        [
+                            ':title' => 'Hello World',
+                            ':description' => 'Hello World',
+                            ':content' => 'Hello World'
+                        ]
+                    )
+                 ->will($this->returnValue(true));
+
+        $Article = new Article($mock_pdo);
+
+        $result = $Article->createRow(
+                                [
+                                    ':title' => 'Hello World',
+                                    ':description' => 'Hello World',
+                                    ':content' => 'Hello World'
+                                ]
+                            );
+
+        $expected = true;
+        $this->assertEquals($expected, $result);
     }
 }
