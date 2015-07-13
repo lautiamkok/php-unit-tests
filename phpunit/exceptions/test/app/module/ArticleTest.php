@@ -4,6 +4,7 @@ namespace Test\Foo\Article;
 
 use Test\SuiteTest;
 use Foo\Article;
+use Foo\ArticleException;
 
 class ArticleTest extends SuiteTest
 {
@@ -23,46 +24,29 @@ class ArticleTest extends SuiteTest
         self::$Article = new Article(self::$PDO);
     }
 
-    // @expectedException annotation to test whether an exception is thrown inside the tested code.
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testException()
+    public function testCreateRowFailsWithEmptyParameters()
     {
-        throw new \InvalidArgumentException();
+        // Some code that is supposed to throw ExceptionOne
+        $result = self::$Article->createRow();
+
+        $error = 'Create parameters must not be empty: title, description, content.';
+        $this->setExpectedException('Foo\ArticleException', $error);
+
+        throw new ArticleException($result);
     }
 
-    // you can use
-    // @expectedExceptionMessage, @expectedExceptionMessageRegExp and @expectedExceptionCode
-    // in combination with @expectedException to test the exception message and exception code
-    /**
-     * @expectedException        InvalidArgumentException
-     * @expectedExceptionMessage Right Message
-     */
-    public function testExceptionHasRightMessage()
+    public function testFetchRowFailsWithInvalidParameter()
     {
-        throw new \InvalidArgumentException('Right Message', 10);
-    }
-
-    public function testException2()
-    {
-        $this->setExpectedException('InvalidArgumentException');
-        throw new \InvalidArgumentException();
-    }
-
-    public function testExceptionHasRightMessage2()
-    {
-        $this->setExpectedException(
-          'InvalidArgumentException', 'Right Message'
+        // Some code that is supposed to throw ExceptionOne
+        $result = self::$Article->fetchRow(
+            [
+                ':article_id' => 'H'
+            ]
         );
-        throw new \InvalidArgumentException('Right Message', 10);
-    }
 
-    public function testExceptionHasRightCode()
-    {
-        $this->setExpectedException(
-          'InvalidArgumentException', 'Right Message', 20
-        );
-        throw new \InvalidArgumentException('The Right Message', 20);
+        $error = 'Fetch required id must be numeric.';
+        $this->setExpectedException('Foo\ArticleException', $error);
+
+        throw new ArticleException($result);
     }
 }
