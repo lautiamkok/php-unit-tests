@@ -14,11 +14,6 @@ class ArticleTest extends SuiteTest
      */
     protected function setUp()
     {
-        $this->truncateTables(
-            [
-                'article'
-            ]
-        );
     }
 
     public function testStub()
