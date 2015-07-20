@@ -1,5 +1,5 @@
 <?php
-
+// @ref: http://docs.mockery.io/en/latest/getting_started/simple_example.html
 namespace Test\Foo\Article;
 
 use Test\SuiteTest;
