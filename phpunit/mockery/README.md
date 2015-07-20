@@ -18,3 +18,6 @@
 
     * http://docs.mockery.io/en/latest/getting_started/simple_example.html
     * http://culttt.com/2013/07/22/getting-started-with-mockery/
+    * http://jontai.me/blog/2012/04/flexible-mock-objects-with-mockery/
+    * http://docs.mockery.io/en/latest/reference/expectations.html
+    * http://www.lutro.me/posts/assertions-on-method-calls-using-mockery
