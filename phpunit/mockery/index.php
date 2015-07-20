@@ -53,6 +53,12 @@ $result = $Article->updateRow(
 print('update: ');
 var_dump($result);
 
+// Get all.
+$result = $Article->fetchTitles();
+
+print('fetch titles: ');
+var_dump($result);
+
 // Delete one.
 $result = $Article->deleteRow(
     [

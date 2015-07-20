@@ -1,5 +1,5 @@
 <?php
-// @ref: http://docs.mockery.io/en/latest/getting_started/simple_example.html
+
 namespace Test\Foo\Article;
 
 use Test\SuiteTest;
@@ -17,8 +17,15 @@ class ArticleTest extends SuiteTest
     {
     }
 
+    /**
+     * Between each test, you need to clean up Mockery
+     * so that any expectations from the previous test do not interfere with the current test.
+     * To do that, we can simply create a tearDown() method:
+    */
     public function tearDown()
     {
+        // The static method close() cleans up the Mockery container used by the current test,
+        // and runs any verification tasks needed for your expectations.
         m::close();
     }
 
@@ -46,6 +53,52 @@ class ArticleTest extends SuiteTest
 
         $expected = 2;
         $this->assertEquals($expected, count($result));
+    }
+
+    public function testFetchRows()
+    {
+        $mock_pdo = m::mock('Foo\Adapter\PdoAdapter');
+
+        $mock_rows = [
+            ['title' => 'First headline'],
+            ['title' => 'Second headline']
+        ];
+
+        $mock_pdo->shouldReceive('fetchRows')
+                 ->andReturnUsing(function () use ($mock_rows) {
+                        return $mock_rows;
+                  });
+
+        $Article = new Article($mock_pdo);
+        $result = $Article->fetchRows();
+
+        $expected = 2;
+        $this->assertEquals($expected, count($result));
+    }
+
+    public function testFetchTitles()
+    {
+        $mock_pdo = m::mock('Foo\Adapter\PdoAdapter');
+
+        $sql = '
+            SELECT *
+            FROM article
+        ';
+
+        $mock_rows = [
+            ['title' => 'First headline'],
+            ['title' => 'Second headline']
+        ];
+
+        $mock_pdo->shouldReceive('fetchRows')
+                 ->with($sql, array())
+                 ->andReturn($mock_rows);
+
+        $Article = new Article($mock_pdo);
+        $result = $Article->fetchTitles(array());
+
+        $expected = ['FIRST HEADLINE', 'SECOND HEADLINE'];
+        $this->assertEquals($expected, $result);
     }
 
     public function testCreateRow()

@@ -13,3 +13,8 @@
     ref: http://code.tutsplus.com/tutorials/mockery-a-better-way--net-28097
 
 2. Run composer update in your CMD.
+
+## References:
+
+    * http://docs.mockery.io/en/latest/getting_started/simple_example.html
+    * http://culttt.com/2013/07/22/getting-started-with-mockery/

@@ -89,6 +89,24 @@ class Article
         return $this->PDO->executeSQL($sql, $params);
     }
 
+    public function fetchTitles(array $params = [])
+    {
+        $titles = array();
+
+        $sql = '
+            SELECT *
+            FROM article
+        ';
+
+        $result = $this->PDO->fetchRows($sql, $params);
+
+        foreach ($result as $key => $row) {
+           $titles[] = strtoupper($row['title']);
+        }
+
+        return $titles;
+    }
+
     public function doSomething()
     {
         // Do something.
