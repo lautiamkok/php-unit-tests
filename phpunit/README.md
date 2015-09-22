@@ -4,7 +4,17 @@
 
 2. Add `C:\php\composer` to the Path in environment variable.
 
-3. Install PHPUnit via Composer - create a file `composer.json`,
+3. Install Global PHPUnit via Composer,
+
+    `composer global require "phpunit/phpunit=4.8.*"`
+
+    Make sure you have ~/.composer/vendor/bin/ in your path. For instance,
+
+    `C:\Users\[username]\AppData\Roaming\Composer\vendor\bin;`
+
+    ref: https://phpunit.de/manual/current/en/installation.html#installation.composer
+
+4. Install PHPUnit via Composer - create a file `composer.json`,
 
     ```
     {
@@ -20,16 +30,14 @@
             }
         },
         "require-dev": {
-            "phpunit/phpunit": "4.7.*"
+            "phpunit/phpunit": "4.8.*"
         }
     }
     ```
 
-    ref: https://phpunit.de/manual/current/en/installation.html#installation.composer
+5. Run composer update in your CMD.
 
-4. Run composer update in your CMD.
-
-5. Create a xml file,
+6. Create a xml file,
 
     ```
     <?xml version="1.0" encoding="UTF-8"?>
@@ -62,7 +70,7 @@
         * https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.testsuites
         * https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.phpunit
 
-6. To run the test, run this line in your CMD,
+7. To run the test, run this line in your CMD,
 
     `phpunit test/app/module/ArticleTest.`
 
