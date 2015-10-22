@@ -43,12 +43,14 @@ class ObserverTest extends SuiteTest
         $observer->expects($this->exactly(2))
                  ->method('onChanged')
                  ->with($subject, 'Jane')
-                 ->will($this->returnValue('Jane'));
+                 //->will($this->returnValue('Jane'));
+                 ->will($this->returnSelf()); // the observer usually returns itself. @ref: http://magento.stackexchange.com/questions/11458/unit-testing-observers-in-magento
 
         // Attach the mocked observer object to the Subject object.
         $subject->addObserver($observer);
 
-        $this->assertEquals('Jane', $observer->onChanged($subject, 'Jane'));
+        // $this->assertEquals('Jane', $observer->onChanged($subject, 'Jane'));
+        $this->assertEquals($observer, $observer->onChanged($subject, 'Jane'));
 
         // Call the addItem() method on the $subject object
         // which we expect to call the mocked Observer object's
